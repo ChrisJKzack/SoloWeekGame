@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
     float moveFactor = 2;
-    float shotTimer = 1f;
+    float shotTimer = 0;
 
 	// Update is called once per frame
 	void FixedUpdate ()
