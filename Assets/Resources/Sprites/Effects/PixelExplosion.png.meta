@@ -1,0 +1,253 @@
+fileFormatVersion: 2
+guid: 4f7e636aa25ed6148be70a21490c1dec
+timeCreated: 1446672905
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: PixelExplosion_0
+    21300002: PixelExplosion_1
+    21300004: PixelExplosion_2
+    21300006: PixelExplosion_3
+    21300008: PixelExplosion_4
+    21300010: PixelExplosion_5
+    21300012: PixelExplosion_6
+    21300014: PixelExplosion_7
+    21300016: PixelExplosion_8
+    21300018: PixelExplosion_9
+    21300020: PixelExplosion_10
+    21300022: PixelExplosion_11
+    21300024: PixelExplosion_12
+    21300026: PixelExplosion_13
+    21300028: PixelExplosion_14
+    21300030: PixelExplosion_15
+    21300032: PixelExplosion_16
+    21300034: PixelExplosion_17
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: PixelExplosion_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 222
+        width: 49
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_1
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 222
+        width: 50
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_2
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 220
+        width: 51
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 220
+        width: 51
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_4
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 220
+        width: 56
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_5
+      rect:
+        serializedVersion: 2
+        x: 491
+        y: 220
+        width: 56
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_6
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 120
+        width: 56
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_7
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 118
+        width: 56
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_8
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 118
+        width: 59
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_9
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 118
+        width: 59
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_10
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 118
+        width: 59
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_11
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 118
+        width: 59
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_12
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 119
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_13
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 19
+        width: 59
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_14
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 22
+        width: 55
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_15
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 27
+        width: 49
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_16
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 40
+        width: 37
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: PixelExplosion_17
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 41
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
