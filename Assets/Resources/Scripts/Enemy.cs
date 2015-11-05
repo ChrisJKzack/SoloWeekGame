@@ -5,6 +5,7 @@ public class Enemy : MonoBehaviour {
 
     float shotTimer = 1;
     bool leftShot = true;
+    public float health = 20;
 
 	void Update ()
     {
@@ -24,6 +25,27 @@ public class Enemy : MonoBehaviour {
         }
 
         shotTimer -= Time.deltaTime;
+
+        if (health <= 0)
+        {
+            Death();
+        }
 	
 	}
+
+    void Death()
+    {
+        Instantiate(Resources.Load("Prefab/Effects/Explosion"), transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "PlayerAttackObj")
+        {
+            health -= other.GetComponent<Damage>().damage;
+            Destroy(other.gameObject);
+          
+        }
+    }
 }

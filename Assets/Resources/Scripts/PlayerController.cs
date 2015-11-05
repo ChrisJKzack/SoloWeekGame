@@ -4,14 +4,21 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
     float moveFactor = 2;
     float shotTimer = 0;
+    float health = 20;
 
 	// Update is called once per frame
 	void FixedUpdate ()
     {
         MovementManager();
         ShotManager();
+    }
 
-
+    void Update()
+    {
+        if (health <= 0)
+        {
+            Death();
+        }
     }
 
     void MovementManager()
@@ -39,6 +46,23 @@ public class PlayerController : MonoBehaviour {
         else
             shotTimer -= Time.deltaTime;
         {
+        }
+    }
+
+	
+
+    void Death()
+    {
+        Instantiate(Resources.Load("Prefab/Effects/Explosion"), transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "EnemyAttackObj")
+        {
+            health -= other.GetComponent<Damage>().damage;
+            Destroy(other.gameObject);
         }
     }
 }
