@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerLaser : MonoBehaviour {
+public class PlayerLaser : Projectile {
     float shotSpeed = 2;
 	
 	// Update is called once per frame
