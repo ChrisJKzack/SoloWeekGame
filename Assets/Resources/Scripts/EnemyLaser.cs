@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyLaser : MonoBehaviour {
+public class EnemyLaser : Projectile {
     float shotSpeed = 2;
 
     // Update is called once per frame
@@ -9,4 +9,6 @@ public class EnemyLaser : MonoBehaviour {
     {
         transform.Translate(new Vector3(0, Time.deltaTime * -shotSpeed, 0));
     }
+
+
 }

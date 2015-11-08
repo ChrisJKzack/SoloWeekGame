@@ -22,7 +22,6 @@ public class FormationGenerator : MonoBehaviour {
             //first ship already made
             for (int x =1; EnemiesInFormation > x; x++)
             {
-                Debug.Log("run");
                 if (right)
                 {
                     GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(middlePosition.transform.position.x + SeperationX * ((x + 1) / 2), middlePosition.transform.position.y + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
@@ -57,7 +56,6 @@ public class FormationGenerator : MonoBehaviour {
                 else
                 {
                     GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(StartX - SeperationX * ((x + 1) / 2), StartY + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
-                    position.name = "left";
                     position.transform.SetParent(formation.transform);
 
                     right = !right;
@@ -70,7 +68,7 @@ public class FormationGenerator : MonoBehaviour {
 
     public void SpawnSomethings()
     {
-        SpawnFormation(4, 2, 2, 0, 0);
+        SpawnFormation(3, 2, 2, 0, 0);
     }
 
     public void AddEnemiesToFormation(Transform Formation)
@@ -79,7 +77,8 @@ public class FormationGenerator : MonoBehaviour {
         {
             GameObject enemy = Instantiate(Resources.Load("Prefab/Enemy/EnemyOne"),child.position,Quaternion.identity) as GameObject;
 
-            enemy.transform.SetParent(child);
+           enemy.transform.SetParent(child);
+           enemy.GetComponent<Animator>().Play("ArrivalRight");
         }
         
     }

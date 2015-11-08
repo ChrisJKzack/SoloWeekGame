@@ -13,11 +13,11 @@ public class Enemy : MonoBehaviour {
         {
             if (leftShot)
             {
-                Instantiate(Resources.Load("Prefab/Enemy/Laser/1"), transform.position + new Vector3(-.25f, -.25f, 0), Quaternion.identity);
+                Instantiate(Resources.Load("Prefab/Enemy/Laser/1"), transform.position + new Vector3(-.25f, -.3f, 0), Quaternion.identity);
             }
             else
             {
-                Instantiate(Resources.Load("Prefab/Enemy/Laser/1"), transform.position + new Vector3(.25f, -.25f, 0), Quaternion.identity);
+                Instantiate(Resources.Load("Prefab/Enemy/Laser/1"), transform.position + new Vector3(.25f, -.3f, 0), Quaternion.identity);
             }
 
             leftShot = !leftShot;
@@ -41,6 +41,8 @@ public class Enemy : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Hit");
+
         if (other.tag == "PlayerAttackObj")
         {
             health -= other.GetComponent<Damage>().damage;
