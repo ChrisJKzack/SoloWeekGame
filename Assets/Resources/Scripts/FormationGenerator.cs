@@ -75,7 +75,7 @@ public class FormationGenerator : MonoBehaviour {
     {
         foreach(Transform child in Formation)
         {
-            GameObject enemy = Instantiate(Resources.Load("Prefab/Enemy/EnemyOne"),child.position,Quaternion.identity) as GameObject;
+            GameObject enemy = Instantiate(Resources.Load("Prefab/Enemy/EnemyOne"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
            enemy.transform.SetParent(child);
            enemy.GetComponent<Animator>().Play("ArrivalRight");
