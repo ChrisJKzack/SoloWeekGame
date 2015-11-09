@@ -71,16 +71,21 @@ public class FormationGenerator : MonoBehaviour {
         SpawnFormation(3, 2, 2, 0, 0);
     }
 
-    public void AddEnemiesToFormation(Transform Formation)
+    void AddEnemiesToFormation(Transform Formation)
     {
         foreach(Transform child in Formation)
         {
             GameObject enemy = Instantiate(Resources.Load("Prefab/Enemy/EnemyOne"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
 
            enemy.transform.SetParent(child);
-           enemy.GetComponent<Animator>().Play("ArrivalRight");
+           enemy.GetComponent<Animator>().Play("ArrivalTop");
         }
         
+    }
+
+    public void SpawnRandomForamtion()
+    {
+        SpawnFormation(Random.Range(0, 6), Random.Range(.5f, 3.5f), Random.Range(.5f, 3.5f), Random.Range(-6, 7), Random.Range(-2.5f, -4.5f));
     }
 
 
