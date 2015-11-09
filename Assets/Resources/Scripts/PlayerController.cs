@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
     float moveFactor = 2;
-    float shotTimer = 0;
+    float shotTimer = .5f;
     float health = 20;
 
 	// Update is called once per frame
@@ -39,8 +39,8 @@ public class PlayerController : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                Instantiate(Resources.Load("Prefab/Player/Laser"),transform.position+new Vector3(0,.5f,0),Quaternion.identity);
-                shotTimer = 1;
+                GameObject laser = Instantiate(Resources.Load("Prefab/Player/Laser"),transform.position+new Vector3(0,.5f,0),Quaternion.identity) as GameObject;
+                shotTimer = .5f;
             }
         }
         else
