@@ -25,11 +25,11 @@ public class PlayerController : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position = new Vector2(transform.position.x + Time.deltaTime * moveFactor, transform.position.y);
+            MoveRight();
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position = new Vector2(transform.position.x - Time.deltaTime * moveFactor, transform.position.y);
+            MoveLeft();
         }
     }
 
@@ -39,14 +39,12 @@ public class PlayerController : MonoBehaviour {
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                GameObject laser = Instantiate(Resources.Load("Prefab/Player/Laser"),transform.position+new Vector3(0,.5f,0),Quaternion.identity) as GameObject;
+                GameObject laser = Instantiate(Resources.Load("Prefab/Player/Laser"), transform.position + new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
                 shotTimer = .5f;
             }
         }
         else
             shotTimer -= Time.deltaTime;
-        {
-        }
     }
 
 	
@@ -65,4 +63,23 @@ void OnTriggerEnter2D(Collider2D other)
             Destroy(other.gameObject);
         }
     }
+
+    public void ShootLaser()
+    {
+        GameObject laser = Instantiate(Resources.Load("Prefab/Player/Laser"), transform.position + new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
+    }
+
+    public void MoveLeft()
+    {
+        transform.position = new Vector2(transform.position.x - Time.deltaTime * moveFactor, transform.position.y);
+    }
+
+    public void MoveRight()
+    {
+        transform.position = new Vector2(transform.position.x + Time.deltaTime * moveFactor, transform.position.y);
+    }
+
+
 }
+
+
