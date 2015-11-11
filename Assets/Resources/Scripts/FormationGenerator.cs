@@ -16,6 +16,8 @@ public class FormationGenerator : MonoBehaviour {
 
             middlePosition.transform.SetParent(formation.transform);
 
+            AddPositionToMap(middlePosition);
+
             
 
 
@@ -25,8 +27,10 @@ public class FormationGenerator : MonoBehaviour {
                 if (right)
                 {
                     GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(middlePosition.transform.position.x + SeperationX * ((x + 1) / 2), middlePosition.transform.position.y + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
-
+                    
                     position.transform.SetParent(formation.transform);
+
+                    AddPositionToMap(position);
 
                     right = !right;
                 }
@@ -34,6 +38,8 @@ public class FormationGenerator : MonoBehaviour {
                 {
                     GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(middlePosition.transform.position.x - SeperationX * ((x + 1) / 2), middlePosition.transform.position.y + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
                     position.transform.SetParent(formation.transform);
+
+                    AddPositionToMap(position);
 
                     right = !right;
                 }
@@ -51,12 +57,17 @@ public class FormationGenerator : MonoBehaviour {
 
                     position.transform.SetParent(formation.transform);
 
+                    AddPositionToMap(position);
+
                     right = !right;
                 }
                 else
                 {
                     GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(StartX - SeperationX * ((x + 1) / 2), StartY + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
+
                     position.transform.SetParent(formation.transform);
+
+                    AddPositionToMap(position);
 
                     right = !right;
                 }
@@ -67,7 +78,7 @@ public class FormationGenerator : MonoBehaviour {
 
 
     public void SpawnSomethings()
-    {
+    { 
         SpawnFormation(3, 2, 2, 0, 0);
     }
 
@@ -85,8 +96,19 @@ public class FormationGenerator : MonoBehaviour {
 
     public void SpawnRandomForamtion()
     {
-        SpawnFormation(Random.Range(0, 6), Random.Range(.5f, 3.5f), Random.Range(.5f, 3.5f), Random.Range(-6, 7), Random.Range(-2.5f, -4.5f));
+        SpawnFormation(Random.Range(0, 6), Random.Range(1, 4),.5f* Random.Range(1, 7), Random.Range(-6, 7), .5f * Random.Range(-5, 9));
     }
+
+    void checkIfPositionAvaliable()
+    {
+
+    }
+
+    void AddPositionToMap(GameObject Position)
+    {
+        EnemyMapping.SetMap(Position.transform.position.x, Position.transform.position.y, "e");
+    }
+
 
 
 }
