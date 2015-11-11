@@ -17,6 +17,8 @@ public class EnemyMapping : MonoBehaviour {
 
     public static void SetMap(float X, float Y,string fill)
     {
+        Debug.Log(X+ "  " +Y);
+
         enemyMap[(int)(Y * 2), (int)X] = fill;
     }
 
