@@ -109,6 +109,11 @@ public class FormationGenerator : MonoBehaviour {
         EnemyMapping.SetMap(Position.transform.position.x, Position.transform.position.y, "e");
     }
 
+    public void Bomb()
+    {
+        
+    }
+
 
 
 }
