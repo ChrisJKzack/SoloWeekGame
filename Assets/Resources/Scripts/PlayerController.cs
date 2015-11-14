@@ -69,6 +69,11 @@ void OnTriggerEnter2D(Collider2D other)
         GameObject laser = Instantiate(Resources.Load("Prefab/Player/Laser"), transform.position + new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
     }
 
+    public void ShootMissle()
+    {
+        GameObject missle = Instantiate(Resources.Load("Prefab/Player/Missle"), transform.position + new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
+    }
+
     public void MoveLeft()
     {
         transform.position = new Vector2(transform.position.x - Time.deltaTime * moveFactor, transform.position.y);
