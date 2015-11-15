@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
     float shotTimer = .5f;
     float health = 20;
 
+    public int missleCount = 3;
+
 	// Update is called once per frame
 	void FixedUpdate ()
     {
@@ -71,7 +73,11 @@ void OnTriggerEnter2D(Collider2D other)
 
     public void ShootMissle()
     {
-        GameObject missle = Instantiate(Resources.Load("Prefab/Player/Missle"), transform.position + new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
+        if (missleCount > 0)
+        {
+            GameObject missle = Instantiate(Resources.Load("Prefab/Player/Missle"), transform.position + new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
+            missleCount--;
+        }
     }
 
     public void MoveLeft()

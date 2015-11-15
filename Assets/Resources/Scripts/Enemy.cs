@@ -35,19 +35,8 @@ public class Enemy : MonoBehaviour {
 
     void Death()
     {
-        Instantiate(Resources.Load("Prefab/Effects/Explosion"), transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Hit");
 
-        if (other.tag == "PlayerAttackObj")
-        {
-            health -= other.GetComponent<Damage>().damage;
-            Destroy(other.gameObject);
-          
-        }
-    }
 }
