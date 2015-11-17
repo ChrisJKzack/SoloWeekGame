@@ -12,13 +12,8 @@ public class FormationGenerator : MonoBehaviour {
         //if odd
         if (EnemiesInFormation % 2 != 0)
         {
-            GameObject middlePosition = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(StartX, StartY, 0), Quaternion.identity) as GameObject;
+            CreatePosition(StartX, StartY, formation.transform);
 
-            middlePosition.transform.SetParent(formation.transform);
-
-            AddPositionToMap(middlePosition);
-
-            
 
 
             //first ship already made
@@ -26,21 +21,13 @@ public class FormationGenerator : MonoBehaviour {
             {
                 if (right)
                 {
-                    GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(middlePosition.transform.position.x + SeperationX * ((x + 1) / 2), middlePosition.transform.position.y + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
-                    
-                    position.transform.SetParent(formation.transform);
-
-                    AddPositionToMap(position);
-
+                    CreatePosition(StartX + SeperationX * ((x + 1) / 2), StartY + SeperationY * ((x + 1) / 2), formation.transform);
                     right = !right;
                 }
                 else
                 {
-                    GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(middlePosition.transform.position.x - SeperationX * ((x + 1) / 2), middlePosition.transform.position.y + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
-                    position.transform.SetParent(formation.transform);
 
-                    AddPositionToMap(position);
-
+                    CreatePosition(StartX - SeperationX * ((x + 1) / 2), StartY + SeperationY * ((x + 1) / 2), formation.transform);
                     right = !right;
                 }
             }
@@ -53,22 +40,12 @@ public class FormationGenerator : MonoBehaviour {
             {
                 if (right)
                 {
-                    GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(StartX + SeperationX * ((x + 1) / 2), StartY + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
-
-                    position.transform.SetParent(formation.transform);
-
-                    AddPositionToMap(position);
-
+                    CreatePosition(StartX + SeperationX * ((x + 1) / 2), StartY + SeperationY * ((x + 1) / 2), formation.transform);
                     right = !right;
                 }
                 else
                 {
-                    GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(StartX - SeperationX * ((x + 1) / 2), StartY + SeperationY * ((x + 1) / 2), 0), Quaternion.identity) as GameObject;
-
-                    position.transform.SetParent(formation.transform);
-
-                    AddPositionToMap(position);
-
+                    CreatePosition(StartX - SeperationX * ((x + 1) / 2), StartY + SeperationY * ((x + 1) / 2), formation.transform);
                     right = !right;
                 }
             }
@@ -96,7 +73,7 @@ public class FormationGenerator : MonoBehaviour {
 
     public void SpawnRandomForamtion()
     {
-        SpawnFormation(Random.Range(0, 6), Random.Range(1, 4),.5f* Random.Range(1, 7), Random.Range(-6, 7), .5f * Random.Range(-5, 9));
+        SpawnFormation(Random.Range(1, 6), Random.Range(1, 4),Random.Range(1, 7),Random.Range(-6,6) +.5f, Random.Range(-2,5) +.5f);
     }
 
     void checkIfPositionAvaliable()
@@ -106,9 +83,19 @@ public class FormationGenerator : MonoBehaviour {
 
     void AddPositionToMap(GameObject Position)
     {
-        EnemyMapping.SetMap(Position.transform.position.x, Position.transform.position.y, "e");
+       EnemyMapping.SetMap(Position.transform.position.x, Position.transform.position.y, "e");
     }
 
+    void CreatePosition(float PosX,float PosY, Transform Formation)
+    {
+        if (EnemyMapping.InboundsAndEmpty(PosX, PosY))
+        {
+            GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(PosX, PosY, 0), Quaternion.identity) as GameObject;
+            position.transform.SetParent(Formation);
+            AddPositionToMap(position);
+        }
+    }
+    
     public void Bomb()
     {
         
