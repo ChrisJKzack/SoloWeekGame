@@ -90,6 +90,10 @@ void OnTriggerEnter2D(Collider2D other)
         transform.position = new Vector2(transform.position.x + Time.deltaTime * moveFactor, transform.position.y);
     }
 
+    public void SpecialMove()
+    {
+
+    }
 
 }
 
