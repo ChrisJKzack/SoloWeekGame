@@ -22,4 +22,13 @@ public class SuperAttack1 : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.tag == "Enemy")
+        {
+            other.GetComponent<Enemy>().health -= 100;
+        }
+    }
 }
