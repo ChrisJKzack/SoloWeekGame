@@ -37,12 +37,25 @@ public class Projectile : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        if (other.tag == "Super")
+        {
+            SuperHit();
+        }
     }
 
     public virtual void EnemyHit()
     {
         GetComponent<PolygonCollider2D>().enabled = false;
         GetComponent<Animator>().SetTrigger("Hit");
+        dead = true;
+    }
+
+    public virtual void SuperHit()
+    {
+        Debug.Log("test");
+        GetComponent<PolygonCollider2D>().enabled = false;
+        GetComponent<Animator>().SetTrigger("Super");
         dead = true;
     }
 

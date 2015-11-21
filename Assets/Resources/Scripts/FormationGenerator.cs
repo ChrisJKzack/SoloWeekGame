@@ -83,7 +83,7 @@ public class FormationGenerator : MonoBehaviour {
 
     void AddPositionToMap(GameObject Position)
     {
-       EnemyMapping.SetMap(Position.transform.position.x, Position.transform.position.y, "e");
+       EnemyMapping.SetToMap(Position.transform.position.x, Position.transform.position.y, "e");
     }
 
     void CreatePosition(float PosX,float PosY, Transform Formation)
