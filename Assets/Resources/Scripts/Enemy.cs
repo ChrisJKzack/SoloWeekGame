@@ -44,7 +44,8 @@ public class Enemy : MonoBehaviour {
         {
             if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Dead"))
             {
-                Destroy(gameObject);
+                EnemyMapping.RemoveFromMap(transform.parent.transform.position.x, transform.parent.transform.position.y);
+                Destroy(transform.parent.gameObject);
             }
         }
 

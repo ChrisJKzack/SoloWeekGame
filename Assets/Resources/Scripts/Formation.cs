@@ -9,7 +9,11 @@ public class Formation : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+    {
+        if (transform.childCount == 0)
+        {
+            Destroy(gameObject);
+        }
 	}
 }

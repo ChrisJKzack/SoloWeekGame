@@ -18,14 +18,18 @@ public class EnemyMapping : MonoBehaviour {
        
     }
 
-    public static void SetMap(float X, float Y,string fill)
+    public static void SetToMap(float X, float Y,string fill)
     {
         int x = (int)(X + 5.5f);
         int y = (int)(Y + 1.5f);
-
-        Debug.Log(x + "  " + y);
-
         enemyMap[y,x] = fill;
+    }
+
+    public static void RemoveFromMap(float X, float Y)
+    {
+        int x = (int)(X + 5.5f);
+        int y = (int)(Y + 1.5f);
+        enemyMap[y, x] = null;
     }
 
     public static bool Inbounds(float X, float Y)
