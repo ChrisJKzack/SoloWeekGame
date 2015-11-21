@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
     float moveFactor = 2;
     float shotTimer = .5f;
     float health = 20;
+    int superAttackNumberLoaded = 1;
 
     public int missleCount = 3;
 
@@ -90,9 +91,17 @@ void OnTriggerEnter2D(Collider2D other)
         transform.position = new Vector2(transform.position.x + Time.deltaTime * moveFactor, transform.position.y);
     }
 
-    public void SpecialMove()
+    public void SuperMove()
     {
+        if (superAttackNumberLoaded != 0)
+        {
+            GameObject superAttack = Instantiate(Resources.Load("Prefab/Player/SuperAttack/" + superAttackNumberLoaded), transform.position + new Vector3(0, .5f, 0), Quaternion.identity) as GameObject;
+        }
+    }
 
+    public void LoadSuperMove(int SuperAttackNumber)
+    {
+        superAttackNumberLoaded = SuperAttackNumber;
     }
 
 }
