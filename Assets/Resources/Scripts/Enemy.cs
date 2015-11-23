@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour {
     bool leftShot = true;
     public float health = 20;
     bool dead = false;
+    public bool stationary;
 
 
     void Update ()
