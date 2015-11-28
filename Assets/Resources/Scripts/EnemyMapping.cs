@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyMapping : MonoBehaviour {
 
@@ -57,5 +58,44 @@ public class EnemyMapping : MonoBehaviour {
         else
         return false;
     }
+
+    void GenerateEnemyPath()
+    {
+
+    }
+
+    bool PathAvaliable(Enemy Enemy, Queue<Vector3> Path)
+    {
+
+        for (int i = Path.Count; i >= 0; i--)
+        {
+            Vector3 targetPos = Path.Dequeue();
+            Path.Enqueue(targetPos);
+
+            if (!MapEmpty(Enemy.startLocation.x + targetPos.x, Enemy.startLocation.x + targetPos.y))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void SetPath(Enemy Enemy, Queue<Vector3> Path)
+    {
+        for (int i = Path.Count; i >= 0; i--)
+        {
+            Vector3 targetPos = Path.Dequeue();
+            Path.Enqueue(targetPos);
+
+            if (!MapEmpty(Enemy.startLocation.x + targetPos.x, Enemy.startLocation.x + targetPos.y))
+            {
+               
+            }
+        }
+    }
+        
+
+
+    
 
 }

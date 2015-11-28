@@ -15,5 +15,12 @@ public class Formation : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        foreach (Transform t in transform)
+        {
+
+        }
 	}
+
+    
 }

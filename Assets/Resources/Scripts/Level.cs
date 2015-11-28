@@ -11,15 +11,7 @@ public class Level : MonoBehaviour {
     public float waveSpawnTimer;
     public float waveSpawnIntervial;
 
-    Vector3 startLocation;
-    Vector3 targetLocation;
 
-    bool triggerMove = false;
-    bool moveOn = false;
-
-    int movesLeft = 3;
-
-    public Queue<Vector3> moveQueue = new Queue<Vector3>();
 
     GameObject formationGenerator;
 
@@ -29,13 +21,11 @@ public class Level : MonoBehaviour {
         waveSpawnIntervial = levelLengthTime / waveNumber;
         waveSpawnTimer = waveSpawnIntervial;
 
-        startLocation = transform.position;
+        
 
         formationGenerator = GameObject.FindGameObjectWithTag("FormationGenerator");
 
-        moveQueue.Enqueue(startLocation + new Vector3(1, 0, 0));
-        moveQueue.Enqueue(startLocation + new Vector3(2, 0, 0));
-        moveQueue.Enqueue(startLocation + new Vector3(3, 0, 0));
+
 
     }
 	
@@ -54,11 +44,6 @@ public class Level : MonoBehaviour {
             waveSpawnTimer = waveSpawnIntervial;
         }
 
-
-        if (moveOn)
-        {
-            
-        }
 	}
 
     void EndLevel()
@@ -71,24 +56,5 @@ public class Level : MonoBehaviour {
         formationGenerator.GetComponent<FormationGenerator>().SpawnRandomForamtion();
     }
 
-    void Move()
-    {
-        transform.Translate(targetLocation * Time.deltaTime);
 
-        if(targetLocation == transform.position)
-        GoToNextTarget();
-    }
-
-    void StartMove()
-    {
-
-        moveOn = true;
-    }
-
-    void GoToNextTarget()
-    {
-        targetLocation = moveQueue.Dequeue();
-        moveQueue.Enqueue(targetLocation);
-        movesLeft--;
-    }
 }

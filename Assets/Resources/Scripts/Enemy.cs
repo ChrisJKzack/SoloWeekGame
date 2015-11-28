@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour {
 
     int movesLeft = 3;
 
+
+
     Queue<Vector3> moveQueue = new Queue<Vector3>();
 
 
@@ -29,8 +31,8 @@ public class Enemy : MonoBehaviour {
 
         moveQueue.Enqueue(startLocation);
         moveQueue.Enqueue(startLocation + new Vector3(1, 0, 0));
-        moveQueue.Enqueue(startLocation + new Vector3(2, 0, 0));
-        moveQueue.Enqueue(startLocation + new Vector3(3, 0, 0));
+        moveQueue.Enqueue(startLocation);
+        moveQueue.Enqueue(startLocation + new Vector3(-1, 0, 0));
     }
 
     void Update ()
@@ -79,9 +81,12 @@ public class Enemy : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (moveOn)
+        if (!dead)
         {
-            Move();
+            if (moveOn)
+            {
+                Move();
+            }
         }
 
     }
