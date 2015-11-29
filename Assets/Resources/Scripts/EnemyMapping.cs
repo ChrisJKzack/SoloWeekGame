@@ -80,8 +80,9 @@ public class EnemyMapping : MonoBehaviour {
         return true;
     }
 
-    void SetPath(Enemy Enemy, Queue<Vector3> Path)
+    public static void SetPath(Enemy Enemy, Dictionary<int, Vector3> MoveQueue)
     {
+        /*
         for (int i = Path.Count; i >= 0; i--)
         {
             Vector3 targetPos = Path.Dequeue();
@@ -89,9 +90,17 @@ public class EnemyMapping : MonoBehaviour {
 
             if (!MapEmpty(Enemy.startLocation.x + targetPos.x, Enemy.startLocation.x + targetPos.y))
             {
-               
+                SetToMap(Enemy.startLocation.x + targetPos.x, Enemy.startLocation.x + targetPos.y, Enemy.name + "m");
             }
         }
+        */
+        for (int i = 0; i < MoveQueue.Count; i++)
+        {
+            SetToMap(MoveQueue[i].x, MoveQueue[i].y, Enemy.name + "m" + i);
+        }
+
+
+
     }
         
 

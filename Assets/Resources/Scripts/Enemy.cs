@@ -22,17 +22,30 @@ public class Enemy : MonoBehaviour {
 
 
 
-    Queue<Vector3> moveQueue = new Queue<Vector3>();
+
+
+    //Queue<Vector3> moveQueue = new Queue<Vector3>();
+
+    Dictionary<int,Vector3> moveQueue = new Dictionary<int, Vector3>();
 
 
     void Start()
     {
         startLocation = transform.position;
 
-        moveQueue.Enqueue(startLocation);
+        moveQueue.Add(0,startLocation);
+        moveQueue.Add(1,startLocation + new Vector3(1, 0, 0));
+        moveQueue.Add(2,startLocation);
+        moveQueue.Add(3,startLocation + new Vector3(-1, 0, 0));
+
+
+
+        /*1
+        moveQueue.Enqueue(startLocation,);
         moveQueue.Enqueue(startLocation + new Vector3(1, 0, 0));
         moveQueue.Enqueue(startLocation);
         moveQueue.Enqueue(startLocation + new Vector3(-1, 0, 0));
+        */
     }
 
     void Update ()
@@ -98,8 +111,7 @@ public class Enemy : MonoBehaviour {
 
 
         transform.position = Vector3.MoveTowards(transform.position, targetLocation, Time.deltaTime);
-       
-        // transform.Translate(targetLocation * Time.deltaTime);
+     
 
 
         
@@ -117,9 +129,32 @@ public class Enemy : MonoBehaviour {
 
     void GoToNextTarget()
     {
+        /*1
         targetLocation = moveQueue.Dequeue();
         moveQueue.Enqueue(targetLocation);
         movesLeft--;
+        */
+        for (int i = 1; i<moveQueue.Count; i++)
+        {
+            if (i == 1)
+            {
+                targetLocation = moveQueue[i];
+            }
+            else if (i == moveQueue.Count-1)
+            {
+                moveQueue[i - 1] = moveQueue[i];
+                moveQueue[i] = moveQueue[0];
+                moveQueue[0] = targetLocation;
+            }
+            else
+            {
+                moveQueue[i - 1] = moveQueue[i];
+            }
+
+            EnemyMapping.SetPath(GetComponent<Enemy>(), moveQueue);
+        }
     }
+
+    
 
 }
