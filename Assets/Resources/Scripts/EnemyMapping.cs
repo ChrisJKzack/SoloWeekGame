@@ -5,6 +5,31 @@ using System.Collections.Generic;
 public class EnemyMapping : MonoBehaviour {
 
    public static string[,] enemyMap = new string[7, 12];
+    Transform[,] debuggingMap = new Transform[7, 12];
+    public bool deBugOn = true;
+
+    void Start()
+    {
+
+        //Deubgging
+        if (deBugOn)
+        {
+            for (int x = 0; x < enemyMap.GetLength(1); x++)
+            {
+                for (int y = 0; y < enemyMap.GetLength(0); y++)
+                {
+                    debuggingMap[y, x] = transform.GetChild(0).transform.GetChild(y).transform.GetChild(x);
+                }
+            }
+        }
+    }
+
+    void Update()
+    {
+        //Debugging
+        if(deBugOn)
+        DebuggingMap();
+    }
 
 
     public static bool MapEmpty(float X, float Y)
@@ -101,6 +126,20 @@ public class EnemyMapping : MonoBehaviour {
 
 
 
+    }
+
+    void DebuggingMap()
+    {
+        for (int x = 0; x < enemyMap.GetLength(1); x++)
+        {
+            for (int y = 0; y < enemyMap.GetLength(0); y++)
+            {
+                if (enemyMap[y, x] != null)
+                {
+                    debuggingMap[y, x].GetComponent<MapDebugging>().filled = enemyMap[y, x];
+                }
+            }
+        }
     }
         
 
