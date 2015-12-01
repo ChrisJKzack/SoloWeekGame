@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Formation : MonoBehaviour {
 
+    public bool moveOn = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -16,9 +18,14 @@ public class Formation : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        foreach (Transform t in transform)
+        if (moveOn)
         {
-
+            foreach (Transform t in transform.GetChild(0).transform)
+            {
+                //TODO make it find the child and turn on each start move
+                transform.GetComponent<Enemy>().StartMove();
+            }
+            moveOn = false;
         }
 	}
 
