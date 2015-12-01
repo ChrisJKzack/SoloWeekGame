@@ -68,6 +68,9 @@ public class FormationGenerator : MonoBehaviour {
         {
             GameObject enemy = Instantiate(Resources.Load("Prefab/Enemy/1"), child.position, Quaternion.identity) as GameObject;
             enemy.transform.SetParent(child);
+            enemyShipCount++;
+            enemy.name = enemyShipCount.ToString();
+            EnemyMapping.SetToMap(enemy.transform.position.x, enemy.transform.position.y, enemy.name);
         }
         
     }
@@ -89,9 +92,7 @@ public class FormationGenerator : MonoBehaviour {
         {
             GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(PosX, PosY, 0), Quaternion.identity) as GameObject;
             position.transform.SetParent(Formation);
-            enemyShipCount++;
-            position.name = enemyShipCount.ToString();
-            EnemyMapping.SetToMap(position.transform.position.x, position.transform.position.y, position.name);
+            
         }
     }
     
