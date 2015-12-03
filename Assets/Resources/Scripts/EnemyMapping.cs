@@ -89,43 +89,33 @@ public class EnemyMapping : MonoBehaviour {
 
     }
 
-    bool PathAvaliable(Enemy Enemy, Queue<Vector3> Path)
+    public static bool PathAvaliable(Enemy Enemy, Dictionary<int, Vector3> MoveQueue)
     {
 
-        for (int i = Path.Count; i >= 0; i--)
+        for (int i = 0; i < MoveQueue.Count; i++)
         {
-            Vector3 targetPos = Path.Dequeue();
-            Path.Enqueue(targetPos);
-
-            if (!MapEmpty(Enemy.startLocation.x + targetPos.x, Enemy.startLocation.x + targetPos.y))
-            {
+            if (!MapEmpty(Enemy.startLocation.x + MoveQueue[i].x, Enemy.startLocation.y + MoveQueue[i].y))
                 return false;
-            }
         }
+
         return true;
     }
 
     public static void SetPath(Enemy Enemy, Dictionary<int, Vector3> MoveQueue)
     {
-        /*
-        for (int i = Path.Count; i >= 0; i--)
-        {
-            Vector3 targetPos = Path.Dequeue();
-            Path.Enqueue(targetPos);
 
-            if (!MapEmpty(Enemy.startLocation.x + targetPos.x, Enemy.startLocation.x + targetPos.y))
-            {
-                SetToMap(Enemy.startLocation.x + targetPos.x, Enemy.startLocation.x + targetPos.y, Enemy.name + "m");
-            }
-        }
-        */
         for (int i = 0; i < MoveQueue.Count; i++)
         {
             SetToMap(MoveQueue[i].x, MoveQueue[i].y, Enemy.name + "m" + i);
         }
+    }
 
-
-
+    public static void SetPathIfAvaliable(Enemy Enemy, Dictionary<int, Vector3> MoveQueue)
+    {
+        if (PathAvaliable(Enemy, MoveQueue))
+        {
+            SetPath(Enemy, MoveQueue);
+        }
     }
 
     void DebuggingMap()
@@ -140,6 +130,73 @@ public class EnemyMapping : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public Dictionary<int, Vector3> CreateRandomPathForFormation(Enemy[] EnemiesInFormation,int LengthOfPath)
+    {
+
+        int lengthOfPath = LengthOfPath;
+
+        bool pathCreated = false;
+        int elementInDictionary = 0;
+
+        Dictionary<int, Vector3> movePath = new Dictionary<int, Vector3>();
+
+        //puts starting position at begging of movePath
+        for (int x = 0; x < EnemiesInFormation.Length; x++)
+            movePath.Add(0, EnemiesInFormation[x].startLocation);
+
+
+        while (pathCreated == false)
+        {
+            while (lengthOfPath > elementInDictionary)
+            {
+                bool leftAvaliable = true;
+                bool rightAvaliable = true;
+                bool upAvaliable = true;
+                bool downAvaliable = true;
+
+                bool upLeftAvaliable = true;
+                bool upRightAvaliable = true;
+                bool downLeftAvaliable = true;
+                bool downRightAvaliable = true;
+
+                foreach (Enemy enemy in EnemiesInFormation)
+                {
+                    Vector3 currentPos = enemy.startLocation;
+
+                    for (int x = 0; x < movePath.Count; x++)
+                    {
+                        if (x != 0)
+                        {
+                            currentPos += movePath[elementInDictionary];
+                        }
+                    }
+                    //cardinal avaliable
+                    if (!InboundsAndEmpty(currentPos.x - 1, currentPos.y))
+                        leftAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x + 1, currentPos.y))
+                        rightAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x, currentPos.y+1))
+                        upAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x, currentPos.y-1))
+                        downAvaliable = false;
+                    //Diagnoal avaliable
+                    if (!InboundsAndEmpty(currentPos.x - 1, currentPos.y +1))
+                        upLeftAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x + 1, currentPos.y +1))
+                        upRightAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x - 1, currentPos.y -1))
+                        downLeftAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x +1, currentPos.y -1))
+                        downRightAvaliable = false;
+
+                }
+
+
+            }
+        }
+        return movePath;
     }
         
 
