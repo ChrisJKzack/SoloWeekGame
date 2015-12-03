@@ -13,6 +13,9 @@ public class Formation : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
+       
+
         if (transform.childCount == 0)
         {
             Destroy(gameObject);
@@ -20,10 +23,9 @@ public class Formation : MonoBehaviour {
 
         if (moveOn)
         {
-            foreach (Transform t in transform.GetChild(0).transform)
+            for(int x = 0;x<transform.GetChildCount();x++)
             {
-                //TODO make it find the child and turn on each start move
-                transform.GetComponent<Enemy>().StartMove();
+                transform.GetChild(x).transform.GetChild(0).GetComponent<Enemy>().StartMove();
             }
             moveOn = false;
         }
