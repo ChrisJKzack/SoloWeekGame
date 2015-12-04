@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class EnemyMapping : MonoBehaviour {
 
    public static string[,] enemyMap = new string[7, 12];
@@ -132,7 +133,7 @@ public class EnemyMapping : MonoBehaviour {
         }
     }
 
-    public Dictionary<int, Vector3> CreateRandomPathForFormation(Enemy[] EnemiesInFormation,int LengthOfPath)
+    public static Dictionary<int, Vector3> CreateRandomPathForFormation(List<Enemy> EnemiesInFormation,int LengthOfPath)
     {
 
         int lengthOfPath = LengthOfPath;
@@ -143,7 +144,7 @@ public class EnemyMapping : MonoBehaviour {
         Dictionary<int, Vector3> movePath = new Dictionary<int, Vector3>();
 
         //puts starting position at begging of movePath
-        for (int x = 0; x < EnemiesInFormation.Length; x++)
+        for (int x = 0; x < EnemiesInFormation.Count; x++)
             movePath.Add(0, EnemiesInFormation[x].startLocation);
 
 
@@ -161,6 +162,24 @@ public class EnemyMapping : MonoBehaviour {
                 bool downLeftAvaliable = true;
                 bool downRightAvaliable = true;
 
+                List<bool> boolList = new List<bool>();
+
+                //Used for randomly selecting a position from possible bools
+                List<int> possibleBoolInt = new List<int>();
+
+
+                boolList.Add(leftAvaliable );
+                boolList.Add(rightAvaliable );
+                boolList.Add(upAvaliable );
+                boolList.Add(downAvaliable );
+
+                boolList.Add(upLeftAvaliable );
+                boolList.Add(upRightAvaliable );
+                boolList.Add(downLeftAvaliable );
+                boolList.Add(downRightAvaliable );
+
+
+                //Checks each enemy in the formation for possible directions
                 foreach (Enemy enemy in EnemiesInFormation)
                 {
                     Vector3 currentPos = enemy.startLocation;
@@ -193,14 +212,227 @@ public class EnemyMapping : MonoBehaviour {
 
                 }
 
+                //if direction is possible addes it to int list for randomly extracting later
+                for (int x = 0; x < boolList.Count; x++)
+                {
+                    if (boolList[x])
+                    {
+                        possibleBoolInt.Add(x);
+                    }
+                }
 
+                if (possibleBoolInt.Count > 0)
+                {
+                    int randomDirectionInt = Random.Range(0, possibleBoolInt.Count + 1);
+
+
+                    //In order that they were declared in
+                    switch (possibleBoolInt[randomDirectionInt])
+                    {
+                        case 0:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(-1, 0, 0));
+                                break;
+                            }
+                        case 1:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(1, 0, 0));
+                                break;
+                            }
+                        case 2:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(0, 1, 0));
+                                break;
+                            }
+                        case 3:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(0, -1, 0));
+                                break;
+                            }
+                        case 4:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(-1, 1, 0));
+                                break;
+                            }
+                        case 5:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(1, 1, 0));
+                                break;
+                            }
+                        case 6:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(-1, -1, 0));
+                                break;
+                            }
+                        case 7:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(1, -1, 0));
+                                break;
+                            }
+                    }
+
+                    elementInDictionary++;
+                }
+                else
+                {
+                    elementInDictionary = lengthOfPath;
+                }
             }
+            pathCreated = true;
         }
         return movePath;
     }
-        
+    public static Dictionary<int, Vector3> CreateRandomPathForFormation(List<Enemy> EnemiesInFormation)
+    {
+
+        int lengthOfPath = Random.Range(0,6);
+
+        bool pathCreated = false;
+        int elementInDictionary = 0;
+
+        Dictionary<int, Vector3> movePath = new Dictionary<int, Vector3>();
+
+        //puts starting position at begging of movePath
+        for (int x = 0; x < EnemiesInFormation.Count; x++)
+            movePath.Add(0, EnemiesInFormation[x].startLocation);
 
 
-    
+        while (pathCreated == false)
+        {
+            while (lengthOfPath > elementInDictionary)
+            {
+                bool leftAvaliable = true;
+                bool rightAvaliable = true;
+                bool upAvaliable = true;
+                bool downAvaliable = true;
+
+                bool upLeftAvaliable = true;
+                bool upRightAvaliable = true;
+                bool downLeftAvaliable = true;
+                bool downRightAvaliable = true;
+
+                List<bool> boolList = new List<bool>();
+
+                //Used for randomly selecting a position from possible bools
+                List<int> possibleBoolInt = new List<int>();
+
+
+                boolList.Add(leftAvaliable);
+                boolList.Add(rightAvaliable);
+                boolList.Add(upAvaliable);
+                boolList.Add(downAvaliable);
+
+                boolList.Add(upLeftAvaliable);
+                boolList.Add(upRightAvaliable);
+                boolList.Add(downLeftAvaliable);
+                boolList.Add(downRightAvaliable);
+
+
+                //Checks each enemy in the formation for possible directions
+                foreach (Enemy enemy in EnemiesInFormation)
+                {
+                    Vector3 currentPos = enemy.startLocation;
+
+                    for (int x = 0; x < movePath.Count; x++)
+                    {
+                        if (x != 0)
+                        {
+                            currentPos += movePath[elementInDictionary];
+                        }
+                    }
+                    //cardinal avaliable
+                    if (!InboundsAndEmpty(currentPos.x - 1, currentPos.y))
+                        leftAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x + 1, currentPos.y))
+                        rightAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x, currentPos.y + 1))
+                        upAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x, currentPos.y - 1))
+                        downAvaliable = false;
+                    //Diagnoal avaliable
+                    if (!InboundsAndEmpty(currentPos.x - 1, currentPos.y + 1))
+                        upLeftAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x + 1, currentPos.y + 1))
+                        upRightAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x - 1, currentPos.y - 1))
+                        downLeftAvaliable = false;
+                    if (!InboundsAndEmpty(currentPos.x + 1, currentPos.y - 1))
+                        downRightAvaliable = false;
+
+                }
+
+                //if direction is possible addes it to int list for randomly extracting later
+                for (int x = 0; x < boolList.Count; x++)
+                {
+                    if (boolList[x])
+                    {
+                        possibleBoolInt.Add(x);
+                    }
+                }
+
+                if (possibleBoolInt.Count > 0)
+                {
+                    int randomDirectionInt = Random.Range(0, possibleBoolInt.Count + 1);
+
+
+                    //In order that they were declared in
+                    switch (possibleBoolInt[randomDirectionInt])
+                    {
+                        case 0:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(-1, 0, 0));
+                                break;
+                            }
+                        case 1:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(1, 0, 0));
+                                break;
+                            }
+                        case 2:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(0, 1, 0));
+                                break;
+                            }
+                        case 3:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(0, -1, 0));
+                                break;
+                            }
+                        case 4:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(-1, 1, 0));
+                                break;
+                            }
+                        case 5:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(1, 1, 0));
+                                break;
+                            }
+                        case 6:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(-1, -1, 0));
+                                break;
+                            }
+                        case 7:
+                            {
+                                movePath.Add(elementInDictionary, new Vector3(1, -1, 0));
+                                break;
+                            }
+                    }
+
+                    elementInDictionary++;
+                }
+                else
+                {
+                    elementInDictionary = lengthOfPath;
+                }
+            }
+            pathCreated = true;
+        }
+        return movePath;
+    }
+
+
+
 
 }
