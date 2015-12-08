@@ -35,7 +35,7 @@ public class Formation : MonoBehaviour {
         }
 	}
 
-    public void GetRandomFormation()
+    public void GetRandomPath()
     {
         moveQueue = EnemyMapping.CreateRandomPathForFormation(enemiesInFormation, 3);
     }
@@ -49,5 +49,5 @@ public class Formation : MonoBehaviour {
     }
 
 
-    
+
 }
