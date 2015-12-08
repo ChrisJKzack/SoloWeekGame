@@ -8,7 +8,7 @@ public class EnemyMapping : MonoBehaviour {
    public static string[,] enemyMap = new string[7, 12];
     Transform[,] debuggingMap = new Transform[7, 12];
     public bool deBugOn = true;
-
+    public int test;
     void Start()
     {
 
@@ -143,9 +143,7 @@ public class EnemyMapping : MonoBehaviour {
 
         Dictionary<int, Vector3> movePath = new Dictionary<int, Vector3>();
 
-        //puts starting position at begging of movePath
-        for (int x = 0; x < EnemiesInFormation.Count; x++)
-            movePath.Add(0, EnemiesInFormation[x].startLocation);
+
 
 
         while (pathCreated == false)
@@ -188,9 +186,10 @@ public class EnemyMapping : MonoBehaviour {
                     {
                         if (x != 0)
                         {
-                            currentPos += movePath[elementInDictionary];
+                            currentPos += movePath[elementInDictionary-1];
                         }
                     }
+
                     //cardinal avaliable
                     if (!InboundsAndEmpty(currentPos.x - 1, currentPos.y))
                         leftAvaliable = false;
@@ -223,7 +222,7 @@ public class EnemyMapping : MonoBehaviour {
 
                 if (possibleBoolInt.Count > 0)
                 {
-                    int randomDirectionInt = Random.Range(0, possibleBoolInt.Count + 1);
+                    int randomDirectionInt = Random.Range(0, possibleBoolInt.Count);
 
 
                     //In order that they were declared in
@@ -287,14 +286,13 @@ public class EnemyMapping : MonoBehaviour {
 
         int lengthOfPath = Random.Range(0,6);
 
+
         bool pathCreated = false;
         int elementInDictionary = 0;
 
         Dictionary<int, Vector3> movePath = new Dictionary<int, Vector3>();
 
-        //puts starting position at begging of movePath
-        for (int x = 0; x < EnemiesInFormation.Count; x++)
-            movePath.Add(0, EnemiesInFormation[x].startLocation);
+
 
 
         while (pathCreated == false)
@@ -337,9 +335,10 @@ public class EnemyMapping : MonoBehaviour {
                     {
                         if (x != 0)
                         {
-                            currentPos += movePath[elementInDictionary];
+                            currentPos += movePath[elementInDictionary - 1];
                         }
                     }
+
                     //cardinal avaliable
                     if (!InboundsAndEmpty(currentPos.x - 1, currentPos.y))
                         leftAvaliable = false;
@@ -372,7 +371,7 @@ public class EnemyMapping : MonoBehaviour {
 
                 if (possibleBoolInt.Count > 0)
                 {
-                    int randomDirectionInt = Random.Range(0, possibleBoolInt.Count + 1);
+                    int randomDirectionInt = Random.Range(0, possibleBoolInt.Count);
 
 
                     //In order that they were declared in
