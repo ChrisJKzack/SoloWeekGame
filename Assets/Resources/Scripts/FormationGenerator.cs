@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FormationGenerator : MonoBehaviour {
+
+    int enemyShipCount = 0;
 
 
      void SpawnFormation(int EnemiesInFormation, float SeperationX, float SeperationY,float StartX,float StartY)
@@ -55,6 +58,7 @@ public class FormationGenerator : MonoBehaviour {
 
 
     public void SpawnSomethings()
+
     { 
         SpawnFormation(3, 2, 2, 0, 0);
     }
@@ -63,10 +67,11 @@ public class FormationGenerator : MonoBehaviour {
     {
         foreach(Transform child in Formation)
         {
-            GameObject enemy = Instantiate(Resources.Load("Prefab/Enemy/EnemyOne"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-
-           enemy.transform.SetParent(child);
-           enemy.GetComponent<Animator>().Play("ArrivalTop");
+            GameObject enemy = Instantiate(Resources.Load("Prefab/Enemy/1"), child.position, Quaternion.identity) as GameObject;
+            enemy.transform.SetParent(child);
+            enemyShipCount++;
+            enemy.name = enemyShipCount.ToString();
+            EnemyMapping.SetToMap(enemy.transform.position.x, enemy.transform.position.y, enemy.name);
         }
         
     }
@@ -81,10 +86,6 @@ public class FormationGenerator : MonoBehaviour {
 
     }
 
-    void AddPositionToMap(GameObject Position)
-    {
-       EnemyMapping.SetToMap(Position.transform.position.x, Position.transform.position.y, "e");
-    }
 
     void CreatePosition(float PosX,float PosY, Transform Formation)
     {
@@ -92,7 +93,7 @@ public class FormationGenerator : MonoBehaviour {
         {
             GameObject position = Instantiate(Resources.Load("Prefab/Formation/Position"), new Vector3(PosX, PosY, 0), Quaternion.identity) as GameObject;
             position.transform.SetParent(Formation);
-            AddPositionToMap(position);
+            
         }
     }
     
@@ -100,6 +101,8 @@ public class FormationGenerator : MonoBehaviour {
     {
         
     }
+
+
 
 
 

@@ -1,19 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Formation : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
+    public bool moveOn = false;
+    public Dictionary<int, Vector3> moveQueue = new Dictionary<int, Vector3>();
+    public List<Enemy> enemiesInFormation;
+
+    // Use this for initialization
+    void Start ()
+    {
+        CreateEnemyList();
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
+
+       
+
         if (transform.childCount == 0)
         {
             Destroy(gameObject);
         }
+
+
+
+        if (moveQueue.Count > 0)
+        {
+            if (moveOn)
+            {
+                foreach (Enemy enemy in enemiesInFormation)
+                {
+                    enemy.SetMovePath(moveQueue);
+                    enemy.StartMove();
+                }
+                moveOn = false;
+            }
+        }
 	}
+
+    public void GetRandomPath()
+    {
+        moveQueue = EnemyMapping.CreateRandomPathForFormation(enemiesInFormation, 3);
+    }
+
+
+
+    void CreateEnemyList()
+    {
+        for (int x = 0; x < transform.GetChildCount(); x++)
+        {
+            enemiesInFormation.Add(transform.GetChild(x).transform.GetChild(0).GetComponent<Enemy>());
+        }
+    }
+
+
+
 }
