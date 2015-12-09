@@ -25,13 +25,19 @@ public class Formation : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        if (moveOn)
+
+
+        if (moveQueue.Count > 0)
         {
-            foreach (Enemy enemy in enemiesInFormation)
+            if (moveOn)
             {
-                enemy.StartMove();
+                foreach (Enemy enemy in enemiesInFormation)
+                {
+                    enemy.SetMovePath(moveQueue);
+                    enemy.StartMove();
+                }
+                moveOn = false;
             }
-            moveOn = false;
         }
 	}
 
@@ -39,6 +45,8 @@ public class Formation : MonoBehaviour {
     {
         moveQueue = EnemyMapping.CreateRandomPathForFormation(enemiesInFormation, 3);
     }
+
+
 
     void CreateEnemyList()
     {

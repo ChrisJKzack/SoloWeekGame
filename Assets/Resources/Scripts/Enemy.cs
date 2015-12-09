@@ -21,11 +21,6 @@ public class Enemy : MonoBehaviour {
     int movesLeft = 3;
 
 
-
-
-
-    //Queue<Vector3> moveQueue = new Queue<Vector3>();
-
     Dictionary<int,Vector3> moveQueue = new Dictionary<int, Vector3>();
 
 
@@ -33,18 +28,11 @@ public class Enemy : MonoBehaviour {
     {
         startLocation = transform.position;
 
+        /*
         moveQueue.Add(0,startLocation);
         moveQueue.Add(1,startLocation + new Vector3(1, 0, 0));
         moveQueue.Add(2,startLocation);
         moveQueue.Add(3,startLocation + new Vector3(-1, 0, 0));
-
-
-
-        /*1
-        moveQueue.Enqueue(startLocation,);
-        moveQueue.Enqueue(startLocation + new Vector3(1, 0, 0));
-        moveQueue.Enqueue(startLocation);
-        moveQueue.Enqueue(startLocation + new Vector3(-1, 0, 0));
         */
     }
 
@@ -106,10 +94,6 @@ public class Enemy : MonoBehaviour {
 
     void Move()
     {
-        Debug.Log("test");
-
-
-
         transform.position = Vector3.MoveTowards(transform.position, targetLocation, Time.deltaTime);
      
 
@@ -117,6 +101,17 @@ public class Enemy : MonoBehaviour {
         
         if (targetLocation == transform.position)
             GoToNextTarget();
+    }
+
+    public void SetMovePath(Dictionary<int, Vector3> MoveQueue)
+    {
+        Vector3 pastMoves = startLocation;
+        for(int x = 0;x<MoveQueue.Count;x++)
+        {
+            moveQueue.Add(x, MoveQueue[x] + pastMoves);
+            pastMoves += MoveQueue[x];
+        }
+        moveQueue.Add(MoveQueue.Count, startLocation);
         
     }
 
